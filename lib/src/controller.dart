@@ -252,6 +252,8 @@ class MapboxMapController extends ChangeNotifier {
   ///
   /// The returned [Future] completes after listeners have been notified.
   Future<void> _updateMapOptions(Map<String, dynamic> optionsUpdate) async {
+    if (_isDisposed) //
+      return;
     _cameraPosition = await _mapboxGlPlatform.updateMapOptions(optionsUpdate);
     notifyListeners();
   }
