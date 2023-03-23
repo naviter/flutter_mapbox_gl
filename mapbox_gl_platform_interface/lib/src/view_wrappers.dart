@@ -45,7 +45,7 @@ class TextureAndroidViewControllerWrapper implements TextureAndroidViewControlle
   Future<void> clearFocus() => _controller.clearFocus();
 
   @override
-  Future<void> create({Size? size}) => _controller.create(size: size);
+  Future<void> create({Size? size, Offset? position}) => _controller.create(size: size, position: position);
 
   @override
   // ignore: invalid_use_of_visible_for_testing_member
@@ -53,6 +53,9 @@ class TextureAndroidViewControllerWrapper implements TextureAndroidViewControlle
 
   @override
   Future<void> dispatchPointerEvent(PointerEvent event) => _controller.dispatchPointerEvent(event);
+
+  @override  
+  bool get requiresViewComposition => _controller.requiresViewComposition;
 
   @override
   //! workaround for flutter 3.0
