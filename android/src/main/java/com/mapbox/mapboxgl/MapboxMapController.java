@@ -1251,12 +1251,15 @@ final class MapboxMapController
       return;
     }
 
+    mapView.onStop();
+    mapView.onDestroy();
+    mapView = null;
+
     if (locationComponent != null) {
       locationComponent.setLocationComponentEnabled(false);
     }
     stopListeningForLocationUpdates();
 
-    mapView.onDestroy();
     mapView = null;
 
    //! TEMPORARY DISABLED, not sure if we need this

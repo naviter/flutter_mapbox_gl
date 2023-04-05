@@ -145,7 +145,7 @@ class MethodChannelMapboxGl extends MapboxGlPlatform {
     if (defaultTargetPlatform == TargetPlatform.android) {
       final useVirtualDeviceMode = (creationParams['useVirtualDeviceMode'] ?? false) as bool;
       if (useVirtualDeviceMode) {
-        return AndroidViewWithWrappedController(
+        return AndroidView(
           viewType: 'plugins.flutter.io/mapbox_gl',
           onPlatformViewCreated: onPlatformViewCreated,
           gestureRecognizers: gestureRecognizers,
@@ -161,7 +161,7 @@ class MethodChannelMapboxGl extends MapboxGlPlatform {
             hitTestBehavior: PlatformViewHitTestBehavior.opaque,
           ),
           onCreatePlatformView: (params) {
-            final view = WrappedPlatformViewsService.initAndroidView(
+            final view = PlatformViewsService.initAndroidView(
               id: params.id,
               viewType: 'plugins.flutter.io/mapbox_gl',
               layoutDirection: TextDirection.ltr,
