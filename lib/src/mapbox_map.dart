@@ -284,7 +284,9 @@ class _MapboxMapState extends State<MapboxMap> {
       return;
     }
     final MapboxMapController controller = await _controller.future;
-    controller._updateMapOptions(updates);
+    if (mounted) {
+      controller._updateMapOptions(updates);
+    }
   }
 
   Future<void> onPlatformViewCreated(int id) async {
