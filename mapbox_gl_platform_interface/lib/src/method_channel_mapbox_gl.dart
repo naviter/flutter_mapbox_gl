@@ -665,6 +665,17 @@ class MethodChannelMapboxGl extends MapboxGlPlatform {
   }
 
   @override
+  Future<String?> getStyle() async {
+    final Map<Object?, Object?> reply = await _channel.invokeMethod('map#getStyle');
+    final result = reply['result'] as bool?;
+    if (result == true) {
+      final json = reply['json'] as String?;
+      return json;
+    }
+    return null;
+  }
+
+  @override
   Future<Point<double>> toScreenCoordinates(LatLng point) async {
     final Map<Object?, Object?> reply = await _channel.invokeMethod(
       'map#toScreenCoordinates',

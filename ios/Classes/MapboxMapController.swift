@@ -757,7 +757,11 @@ class MapboxMapController: NSObject, FlutterPlatformView, MGLMapViewDelegate, Ma
 
             reply["result"] = ret
             result(reply)
-         case "map#toScreenCoortinates":
+        case "map#getStyle":            
+            var reply: [String: Bool] = [:]        
+            reply["result"] = false
+            result(reply)        
+        case "map#toScreenCoortinates":
             guard let arguments = methodCall.arguments as? [String: Any] else { return }
             guard let latitude = arguments["latitude"] as? Double else { return }
             guard let longitude = arguments["longitude"] as? Double else { return }

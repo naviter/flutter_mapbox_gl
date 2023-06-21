@@ -1105,6 +1105,23 @@ final class MapboxMapController
         result.success(reply);
         break;
       }
+      case "map#getStyle": {
+        Map<String, Object> reply = new HashMap<>();
+        boolean ret = false;
+        if (mapboxMap != null) {
+          Style style = mapboxMap.getStyle();
+          if (style != null) {
+            try {
+              String json = style.getJson();
+              reply.put("json", json);
+              ret = true;
+            } catch (Exception e) {}
+          }
+        }        
+        reply.put("result", ret);
+        result.success(reply);
+        break;
+      }
       case "map#toScreenCoordinates": {
         Double latitude = call.argument("latitude");
         Double longitude = call.argument("longitude");

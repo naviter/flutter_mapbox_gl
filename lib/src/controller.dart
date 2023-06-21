@@ -1161,6 +1161,10 @@ class MapboxMapController extends ChangeNotifier {
     return await _mapboxGlPlatform.editGeoJsonUrl(id, url);
   }
 
+  Future<String?> getStyle() async {
+    return await _mapboxGlPlatform.getStyle();
+  }
+
   Future<Point<double>> toScreenCoordinates(LatLng point) async {
     return await _mapboxGlPlatform.toScreenCoordinates(point);
   }

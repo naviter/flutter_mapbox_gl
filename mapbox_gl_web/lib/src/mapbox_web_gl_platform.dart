@@ -875,6 +875,7 @@ class MapboxWebGlPlatform extends MapboxGlPlatform
   @override Future<Map<String, String>> getCustomHeaders() => throw UnimplementedError();
   @override Future<Map<String, String>> getLastUsedCustomHeaders() => throw UnimplementedError();
   @override Future<Point<double>> toScreenCoordinates(LatLng point) => throw UnimplementedError();
+  @override Future<String?> getStyle() => throw UnimplementedError();
   @override Future<bool> editGeoJsonSource(String id, String data) => throw UnimplementedError();
   @override Future<bool> editGeoJsonUrl(String id, String url) => throw UnimplementedError();
   @override Future<bool> setLayerVisibility(String layerId, bool isVisible) => throw UnimplementedError();
