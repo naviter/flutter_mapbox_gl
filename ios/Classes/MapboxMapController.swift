@@ -715,6 +715,33 @@ class MapboxMapController: NSObject, FlutterPlatformView, MGLMapViewDelegate, Ma
 
             reply["result"] = ret
             result(reply)
+         case "map#setLayerFilter":
+            guard let arguments = methodCall.arguments as? [String: Any] else { return }
+            guard let layerId = arguments["id"] as? String else { return }
+            guard let layerFilter = arguments["filter"] as? String else { return }
+            guard let style = self.mapView.style else { return }
+
+            var ret: Bool = false
+            var reply: [String: Bool] = [:]
+            let layer = style.layer(withIdentifier: layerId)
+            if layer != nil {
+                do {
+                    if let data = layerFilter.data(using: .utf8) {
+                        let jsonFilter = try JSONSerialization.jsonObject(with: data, options: [])
+                        let predicate = NSPredicate(mglJSONObject: filter)
+                        if let layer = layer as? MGLVectorStyleLayer {
+                            layer.predicate = predicate
+                            ret = true
+                        }
+                    }
+                } catch {
+                    print("Error parsing filter: \(error.localizedDescription)")
+                }
+                ret = true
+            }
+
+            reply["result"] = ret
+            result(reply)
          case "map#editGeoJsonSource":
             guard let arguments = methodCall.arguments as? [String: Any] else { return }
             guard let srcId = arguments["id"] as? String else { return }

@@ -879,6 +879,7 @@ class MapboxWebGlPlatform extends MapboxGlPlatform
   @override Future<bool> editGeoJsonSource(String id, String data) => throw UnimplementedError();
   @override Future<bool> editGeoJsonUrl(String id, String url) => throw UnimplementedError();
   @override Future<bool> setLayerVisibility(String layerId, bool isVisible) => throw UnimplementedError();
+  @override Future<bool> setLayerFilter(String layerId, String filter) => throw UnimplementedError();
   @override Future<void> animateCameraWithDuration(CameraUpdate cameraUpdate, int duration) => throw UnimplementedError();
   @override Future<void> forceOnlineMode() => throw UnimplementedError();
   @override Future<void> setCustomHeaders(Map<String, String> headers, List<String> filter) async => throw UnimplementedError();

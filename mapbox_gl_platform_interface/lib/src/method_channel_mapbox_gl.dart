@@ -645,6 +645,16 @@ class MethodChannelMapboxGl extends MapboxGlPlatform {
   }
 
   @override
+  Future<bool> setLayerFilter(String layerId, String filter) async {
+    final Map<Object?, Object?> reply = await _channel.invokeMethod('map#setLayerFilter', <String, dynamic>{
+      'id': layerId,
+      'filter': filter,
+    });
+    final result = reply['result'];
+    return result == true;
+  }
+
+  @override
   Future<bool> editGeoJsonSource(String id, String data) async {
     final Map<Object?, Object?> reply = await _channel.invokeMethod('map#editGeoJsonSource', <String, dynamic>{
       'id': id,

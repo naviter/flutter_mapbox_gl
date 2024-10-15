@@ -1067,6 +1067,41 @@ final class MapboxMapController
         result.success(reply);
         break;
       }
+      case "map#setLayerFilter": {
+        boolean ret = false;
+        if (mapboxMap != null) {
+          Style style = mapboxMap.getStyle();
+          if (style != null) {
+              try {
+                  Layer layer = style.getLayer(call.argument("id"));
+                  if (layer != null) {
+                      String filter = call.argument("filter");
+                      if (filter != null) {
+                          Expression expression = Expression.raw(filter);
+                          if (expression != null) {
+                            if (layer instanceof LineLayer) {
+                              ((LineLayer)layer).setFilter(expression);
+                              ret = true;
+                            } else if (layer instanceof FillLayer) {
+                              ((FillLayer)layer).setFilter(expression);
+                              ret = true;
+                            } else if (layer instanceof SymbolLayer) {
+                              ((SymbolLayer)layer).setFilter(expression);
+                              ret = true;
+                            }
+                          }
+                      }
+                  }
+              } catch (Exception e) {
+                  e.printStackTrace();
+              }
+          }
+        }
+        Map<String, Boolean> reply = new HashMap<>();
+        reply.put("result", ret);
+        result.success(reply);
+        break;
+      }
       case "map#editGeoJsonSource": {
         boolean ret = false;
         if (mapboxMap != null) {

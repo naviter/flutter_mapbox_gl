@@ -145,6 +145,7 @@ abstract class MapboxGlPlatform {
   Future<void> animateCameraWithDuration(CameraUpdate cameraUpdate, int duration); //=> animateCamera with duration as parameter
   Future<CameraPosition?> queryCameraPosition(); //?=> updateMapOptions, needs testing if it's fast enough
   Future<bool> setLayerVisibility(String layerId, bool isVisible); //*=> awaiting PR
+  Future<bool> setLayerFilter(String layerId, String filter); //*=> awaiting PR
   Future<bool> editGeoJsonSource(String id, String data); //?=> setGeoJsonSource, needs testing if it works
   Future<bool> editGeoJsonUrl(String id, String url); ////=> won't migrate
   Future<String?> getStyle(); //! needs to be migrated

@@ -1153,6 +1153,10 @@ class MapboxMapController extends ChangeNotifier {
     return await _mapboxGlPlatform.setLayerVisibility(layerId, isVisible);
   }
 
+  Future<bool> setLayerFilter(String layerId, String filter) async {
+    return await _mapboxGlPlatform.setLayerFilter(layerId, filter);
+  }
+
   Future<bool> editGeoJsonSource(String id, String data) async {
     return await _mapboxGlPlatform.editGeoJsonSource(id, data);
   }
