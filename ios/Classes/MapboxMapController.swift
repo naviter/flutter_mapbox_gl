@@ -200,7 +200,10 @@ class MapboxMapController: NSObject, FlutterPlatformView, MGLMapViewDelegate, Ma
             result(nil)
         case "map#queryRenderedFeatures":
             guard let arguments = methodCall.arguments as? [String: Any] else { return }
-            let layerIds = arguments["layerIds"] as? Set<String>
+            var layerIds: Set<String>?
+            if let layerIdsArray = arguments["layerIds"] as? NSArray {
+                layerIds = Set(layerIdsArray as? [String] ?? [])
+            }
             var filterExpression: NSPredicate?
             if let filter = arguments["filter"] as? [Any] {
                 filterExpression = NSPredicate(mglJSONObject: filter)
@@ -728,7 +731,7 @@ class MapboxMapController: NSObject, FlutterPlatformView, MGLMapViewDelegate, Ma
                 do {
                     if let data = layerFilter.data(using: .utf8) {
                         let jsonFilter = try JSONSerialization.jsonObject(with: data, options: [])
-                        let predicate = NSPredicate(mglJSONObject: filter)
+                        let predicate = NSPredicate(mglJSONObject: jsonFilter)
                         if let layer = layer as? MGLVectorStyleLayer {
                             layer.predicate = predicate
                             ret = true
