@@ -202,7 +202,7 @@ class MapboxMapController: NSObject, FlutterPlatformView, MGLMapViewDelegate, Ma
             guard let arguments = methodCall.arguments as? [String: Any] else { return }
             var layerIds: Set<String>?
             if let layerIdsArray = arguments["layerIds"] as? NSArray {
-                layerIds = Set(layerIdsArray as? [String] ?? [])
+                layerIds = layerIdsArray.count > 0 ? Set(layerIdsArray as? [String] ?? []) : nil
             }
             var filterExpression: NSPredicate?
             if let filter = arguments["filter"] as? [Any] {
