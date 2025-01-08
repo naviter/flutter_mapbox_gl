@@ -1036,7 +1036,7 @@ final class MapboxMapController
       case "camera#animateWithDuration": {
         final CameraUpdate cameraUpdate = Convert.toCameraUpdate(call.argument("cameraUpdate"), mapboxMap, density);
         final int duration = (int)call.argument("duration");
-        if (cameraUpdate != null) {
+        if (cameraUpdate != null && duration > 0) {
           // camera transformation not handled yet
           mapboxMap.easeCamera(cameraUpdate, duration, false);
         }
