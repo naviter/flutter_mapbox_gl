@@ -325,11 +325,12 @@ final class MapboxMapController
   }
 
   private void addGeoJsonSource(String sourceName, String source) {
-    FeatureCollection featureCollection = FeatureCollection.fromJson(source);
-    GeoJsonSource geoJsonSource = new GeoJsonSource(sourceName, featureCollection);
-    addedFeaturesByLayer.put(sourceName, featureCollection);
-
-    style.addSource(geoJsonSource);
+    if (style != null && style.isFullyLoaded()) {
+      FeatureCollection featureCollection = FeatureCollection.fromJson(source);
+      GeoJsonSource geoJsonSource = new GeoJsonSource(sourceName, featureCollection);
+      addedFeaturesByLayer.put(sourceName, featureCollection);
+      style.addSource(geoJsonSource);
+    }
   }
 
   private void setGeoJsonSource(String sourceName, String geojson) {
