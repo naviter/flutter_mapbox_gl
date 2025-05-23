@@ -25,16 +25,9 @@ class GlobalMethodHandler implements MethodChannel.MethodCallHandler {
   private static final String DATABASE_NAME = "mbgl-offline.db";
   private static final int BUFFER_SIZE = 1024 * 2;
 
-  @Nullable private PluginRegistry.Registrar registrar;
   @Nullable private FlutterPlugin.FlutterAssets flutterAssets;
   @NonNull private final Context context;
   @NonNull private final BinaryMessenger messenger;
-
-  GlobalMethodHandler(@NonNull PluginRegistry.Registrar registrar) {
-    this.registrar = registrar;
-    this.context = registrar.activeContext();
-    this.messenger = registrar.messenger();
-  }
 
   GlobalMethodHandler(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
     this.context = binding.getApplicationContext();
@@ -113,9 +106,7 @@ class GlobalMethodHandler implements MethodChannel.MethodCallHandler {
       return new FileInputStream(new File(tilesDb));
     } else {
       String assetKey;
-      if (registrar != null) {
-        assetKey = registrar.lookupKeyForAsset(tilesDb);
-      } else if (flutterAssets != null) {
+      if (flutterAssets != null) {
         assetKey = flutterAssets.getAssetFilePathByName(tilesDb);
       } else {
         throw new IllegalStateException();
